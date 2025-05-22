@@ -1,0 +1,750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AuthorizationDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Basket">
+          <Key>
+            <PropertyRef Name="id_Basket" />
+          </Key>
+          <Property Name="id_Basket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Medicament" Type="int" Nullable="false" />
+          <Property Name="ficClient" Type="varchar" MaxLength="100" />
+          <Property Name="countMedicament" Type="int" Nullable="false" />
+          <Property Name="id_Workers" Type="int" />
+          <Property Name="Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ficClient" />
+          </Key>
+          <Property Name="id_Client" Type="int" Nullable="false" />
+          <Property Name="ficClient" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="1" />
+          <Property Name="ageClient" Type="int" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="11" />
+          <Property Name="hasRecept" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="collect">
+          <Key>
+            <PropertyRef Name="img" />
+          </Key>
+          <Property Name="img" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="id_JobTitle" />
+          </Key>
+          <Property Name="id_JobTitle" Type="int" Nullable="false" />
+          <Property Name="NameJobTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="Seylary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicament">
+          <Key>
+            <PropertyRef Name="id_Medicament" />
+          </Key>
+          <Property Name="id_Medicament" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameMedicament" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="medicamentOnRecept" Type="bit" Nullable="false" />
+          <Property Name="healthEffect" Type="varchar" MaxLength="100" />
+          <Property Name="priceMedicament" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicamentFirms">
+          <Key>
+            <PropertyRef Name="id_Firms" />
+          </Key>
+          <Property Name="id_Firms" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameFirms" Type="varchar" MaxLength="30" />
+          <Property Name="countryPlace" Type="varchar" MaxLength="50" />
+          <Property Name="id_Medicament" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderClient">
+          <Key>
+            <PropertyRef Name="id_Order" />
+          </Key>
+          <Property Name="id_Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateOrder" Type="datetime" />
+          <Property Name="id_Basket" Type="int" Nullable="false" />
+          <Property Name="id_Employee" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="id_Shipment" />
+          </Key>
+          <Property Name="id_Shipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Medicament" Type="int" Nullable="false" />
+          <Property Name="id_Firms" Type="int" Nullable="false" />
+          <Property Name="id_Employee" Type="int" Nullable="false" />
+          <Property Name="dateShipment" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="id_MedicamentPosition" />
+          </Key>
+          <Property Name="id_MedicamentPosition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Medicament" Type="int" Nullable="false" />
+          <Property Name="countOnStorage" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="id_Workers" />
+          </Key>
+          <Property Name="id_Workers" Type="int" Nullable="false" />
+          <Property Name="FioWorkers" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_JobTitle" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Basket__ficClien__7F2BE32F">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ficClient" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="ficClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Basket__Id__151B244E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Basket__id_Medic__7E37BEF6">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Basket__id_Worke__14270015">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="id_Workers" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="id_Workers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Medicamen__id_Me__71D1E811">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="MedicamentFirms" Type="Self.MedicamentFirms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="MedicamentFirms">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderClie__id_Ba__02084FDA">
+          <End Role="Basket" Type="Self.Basket" Multiplicity="1" />
+          <End Role="OrderClient" Type="Self.OrderClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basket">
+              <PropertyRef Name="id_Basket" />
+            </Principal>
+            <Dependent Role="OrderClient">
+              <PropertyRef Name="id_Basket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipment__dateSh__114A936A">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipment__id_Emp__1332DBDC">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="id_Workers" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipment__id_Fir__123EB7A3">
+          <End Role="MedicamentFirms" Type="Self.MedicamentFirms" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicamentFirms">
+              <PropertyRef Name="id_Firms" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="id_Firms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Storage__id_Medi__04E4BC85">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Workers__id_JobT__4BAC3F29">
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="id_JobTitle" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="id_JobTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AuthorizationDBModelContainer">
+          <EntitySet Name="Basket" EntityType="Self.Basket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="collect" EntityType="Self.collect" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTitle" EntityType="Self.JobTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicament" EntityType="Self.Medicament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicamentFirms" EntityType="Self.MedicamentFirms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderClient" EntityType="Self.OrderClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Basket__ficClien__7F2BE32F" Association="Self.FK__Basket__ficClien__7F2BE32F">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Basket__Id__151B244E" Association="Self.FK__Basket__Id__151B244E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Basket__id_Medic__7E37BEF6" Association="Self.FK__Basket__id_Medic__7E37BEF6">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Basket__id_Worke__14270015" Association="Self.FK__Basket__id_Worke__14270015">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Medicamen__id_Me__71D1E811" Association="Self.FK__Medicamen__id_Me__71D1E811">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="MedicamentFirms" EntitySet="MedicamentFirms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderClie__id_Ba__02084FDA" Association="Self.FK__OrderClie__id_Ba__02084FDA">
+            <End Role="Basket" EntitySet="Basket" />
+            <End Role="OrderClient" EntitySet="OrderClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipment__dateSh__114A936A" Association="Self.FK__Shipment__dateSh__114A936A">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipment__id_Emp__1332DBDC" Association="Self.FK__Shipment__id_Emp__1332DBDC">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipment__id_Fir__123EB7A3" Association="Self.FK__Shipment__id_Fir__123EB7A3">
+            <End Role="MedicamentFirms" EntitySet="MedicamentFirms" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Storage__id_Medi__04E4BC85" Association="Self.FK__Storage__id_Medi__04E4BC85">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Workers__id_JobT__4BAC3F29" Association="Self.FK__Workers__id_JobT__4BAC3F29">
+            <End Role="JobTitle" EntitySet="JobTitle" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuthorizationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Basket">
+          <Key>
+            <PropertyRef Name="id_Basket" />
+          </Key>
+          <Property Name="id_Basket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="ficClient" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="countMedicament" Type="Int32" Nullable="false" />
+          <Property Name="id_Workers" Type="Int32" />
+          <Property Name="Id" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Basket__ficClien__7F2BE32F" FromRole="Basket" ToRole="Client" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Basket__Id__151B244E" FromRole="Basket" ToRole="Users" />
+          <NavigationProperty Name="Medicament" Relationship="Self.FK__Basket__id_Medic__7E37BEF6" FromRole="Basket" ToRole="Medicament" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK__Basket__id_Worke__14270015" FromRole="Basket" ToRole="Workers" />
+          <NavigationProperty Name="OrderClient" Relationship="Self.FK__OrderClie__id_Ba__02084FDA" FromRole="Basket" ToRole="OrderClient" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ficClient" />
+          </Key>
+          <Property Name="id_Client" Type="Int32" Nullable="false" />
+          <Property Name="ficClient" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ageClient" Type="Int32" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="hasRecept" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Basket" Relationship="Self.FK__Basket__ficClien__7F2BE32F" FromRole="Client" ToRole="Basket" />
+        </EntityType>
+        <EntityType Name="collect">
+          <Key>
+            <PropertyRef Name="img" />
+          </Key>
+          <Property Name="img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="id_JobTitle" />
+          </Key>
+          <Property Name="id_JobTitle" Type="Int32" Nullable="false" />
+          <Property Name="NameJobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Seylary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK__Workers__id_JobT__4BAC3F29" FromRole="JobTitle" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Medicament">
+          <Key>
+            <PropertyRef Name="id_Medicament" />
+          </Key>
+          <Property Name="id_Medicament" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameMedicament" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="medicamentOnRecept" Type="Boolean" Nullable="false" />
+          <Property Name="healthEffect" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="priceMedicament" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basket" Relationship="Self.FK__Basket__id_Medic__7E37BEF6" FromRole="Medicament" ToRole="Basket" />
+          <NavigationProperty Name="MedicamentFirms" Relationship="Self.FK__Medicamen__id_Me__71D1E811" FromRole="Medicament" ToRole="MedicamentFirms" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK__Shipment__dateSh__114A936A" FromRole="Medicament" ToRole="Shipment" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK__Storage__id_Medi__04E4BC85" FromRole="Medicament" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="MedicamentFirms">
+          <Key>
+            <PropertyRef Name="id_Firms" />
+          </Key>
+          <Property Name="id_Firms" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameFirms" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="countryPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_Medicament" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicament" Relationship="Self.FK__Medicamen__id_Me__71D1E811" FromRole="MedicamentFirms" ToRole="Medicament" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK__Shipment__id_Fir__123EB7A3" FromRole="MedicamentFirms" ToRole="Shipment" />
+        </EntityType>
+        <EntityType Name="OrderClient">
+          <Key>
+            <PropertyRef Name="id_Order" />
+          </Key>
+          <Property Name="id_Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateOrder" Type="DateTime" Precision="3" />
+          <Property Name="id_Basket" Type="Int32" Nullable="false" />
+          <Property Name="id_Employee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basket" Relationship="Self.FK__OrderClie__id_Ba__02084FDA" FromRole="OrderClient" ToRole="Basket" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="id_Shipment" />
+          </Key>
+          <Property Name="id_Shipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="id_Firms" Type="Int32" Nullable="false" />
+          <Property Name="id_Employee" Type="Int32" Nullable="false" />
+          <Property Name="dateShipment" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Medicament" Relationship="Self.FK__Shipment__dateSh__114A936A" FromRole="Shipment" ToRole="Medicament" />
+          <NavigationProperty Name="MedicamentFirms" Relationship="Self.FK__Shipment__id_Fir__123EB7A3" FromRole="Shipment" ToRole="MedicamentFirms" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK__Shipment__id_Emp__1332DBDC" FromRole="Shipment" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="id_MedicamentPosition" />
+          </Key>
+          <Property Name="id_MedicamentPosition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="countOnStorage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicament" Relationship="Self.FK__Storage__id_Medi__04E4BC85" FromRole="Storage" ToRole="Medicament" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Basket" Relationship="Self.FK__Basket__Id__151B244E" FromRole="Users" ToRole="Basket" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="id_Workers" />
+          </Key>
+          <Property Name="id_Workers" Type="Int32" Nullable="false" />
+          <Property Name="FioWorkers" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_JobTitle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basket" Relationship="Self.FK__Basket__id_Worke__14270015" FromRole="Workers" ToRole="Basket" />
+          <NavigationProperty Name="JobTitle" Relationship="Self.FK__Workers__id_JobT__4BAC3F29" FromRole="Workers" ToRole="JobTitle" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK__Shipment__id_Emp__1332DBDC" FromRole="Workers" ToRole="Shipment" />
+        </EntityType>
+        <Association Name="FK__Basket__ficClien__7F2BE32F">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ficClient" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="ficClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Basket__Id__151B244E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Basket__id_Medic__7E37BEF6">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Basket__id_Worke__14270015">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="id_Workers" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="id_Workers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderClie__id_Ba__02084FDA">
+          <End Role="Basket" Type="Self.Basket" Multiplicity="1" />
+          <End Role="OrderClient" Type="Self.OrderClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basket">
+              <PropertyRef Name="id_Basket" />
+            </Principal>
+            <Dependent Role="OrderClient">
+              <PropertyRef Name="id_Basket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Workers__id_JobT__4BAC3F29">
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="id_JobTitle" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="id_JobTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Medicamen__id_Me__71D1E811">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="MedicamentFirms" Type="Self.MedicamentFirms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="MedicamentFirms">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipment__dateSh__114A936A">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Storage__id_Medi__04E4BC85">
+          <End Role="Medicament" Type="Self.Medicament" Multiplicity="1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicament">
+              <PropertyRef Name="id_Medicament" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="id_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipment__id_Fir__123EB7A3">
+          <End Role="MedicamentFirms" Type="Self.MedicamentFirms" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicamentFirms">
+              <PropertyRef Name="id_Firms" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="id_Firms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipment__id_Emp__1332DBDC">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="id_Workers" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuthorizationDBEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Basket" EntityType="Self.Basket" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="collect" EntityType="Self.collect" />
+          <EntitySet Name="JobTitle" EntityType="Self.JobTitle" />
+          <EntitySet Name="Medicament" EntityType="Self.Medicament" />
+          <EntitySet Name="MedicamentFirms" EntityType="Self.MedicamentFirms" />
+          <EntitySet Name="OrderClient" EntityType="Self.OrderClient" />
+          <EntitySet Name="Shipment" EntityType="Self.Shipment" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" />
+          <AssociationSet Name="FK__Basket__ficClien__7F2BE32F" Association="Self.FK__Basket__ficClien__7F2BE32F">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Basket__Id__151B244E" Association="Self.FK__Basket__Id__151B244E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Basket__id_Medic__7E37BEF6" Association="Self.FK__Basket__id_Medic__7E37BEF6">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Basket__id_Worke__14270015" Association="Self.FK__Basket__id_Worke__14270015">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Basket" EntitySet="Basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderClie__id_Ba__02084FDA" Association="Self.FK__OrderClie__id_Ba__02084FDA">
+            <End Role="Basket" EntitySet="Basket" />
+            <End Role="OrderClient" EntitySet="OrderClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Workers__id_JobT__4BAC3F29" Association="Self.FK__Workers__id_JobT__4BAC3F29">
+            <End Role="JobTitle" EntitySet="JobTitle" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Medicamen__id_Me__71D1E811" Association="Self.FK__Medicamen__id_Me__71D1E811">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="MedicamentFirms" EntitySet="MedicamentFirms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipment__dateSh__114A936A" Association="Self.FK__Shipment__dateSh__114A936A">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Storage__id_Medi__04E4BC85" Association="Self.FK__Storage__id_Medi__04E4BC85">
+            <End Role="Medicament" EntitySet="Medicament" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipment__id_Fir__123EB7A3" Association="Self.FK__Shipment__id_Fir__123EB7A3">
+            <End Role="MedicamentFirms" EntitySet="MedicamentFirms" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipment__id_Emp__1332DBDC" Association="Self.FK__Shipment__id_Emp__1332DBDC">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AuthorizationDBModelContainer" CdmEntityContainer="AuthorizationDBEntities6">
+          <EntitySetMapping Name="Basket">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Basket">
+              <MappingFragment StoreEntitySet="Basket">
+                <ScalarProperty Name="id_Basket" ColumnName="id_Basket" />
+                <ScalarProperty Name="id_Medicament" ColumnName="id_Medicament" />
+                <ScalarProperty Name="ficClient" ColumnName="ficClient" />
+                <ScalarProperty Name="countMedicament" ColumnName="countMedicament" />
+                <ScalarProperty Name="id_Workers" ColumnName="id_Workers" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id_Client" ColumnName="id_Client" />
+                <ScalarProperty Name="ficClient" ColumnName="ficClient" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="ageClient" ColumnName="ageClient" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="hasRecept" ColumnName="hasRecept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="collect">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.collect">
+              <MappingFragment StoreEntitySet="collect">
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitle">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.JobTitle">
+              <MappingFragment StoreEntitySet="JobTitle">
+                <ScalarProperty Name="id_JobTitle" ColumnName="id_JobTitle" />
+                <ScalarProperty Name="NameJobTitle" ColumnName="NameJobTitle" />
+                <ScalarProperty Name="Seylary" ColumnName="Seylary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicament">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Medicament">
+              <MappingFragment StoreEntitySet="Medicament">
+                <ScalarProperty Name="id_Medicament" ColumnName="id_Medicament" />
+                <ScalarProperty Name="nameMedicament" ColumnName="nameMedicament" />
+                <ScalarProperty Name="medicamentOnRecept" ColumnName="medicamentOnRecept" />
+                <ScalarProperty Name="healthEffect" ColumnName="healthEffect" />
+                <ScalarProperty Name="priceMedicament" ColumnName="priceMedicament" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicamentFirms">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.MedicamentFirms">
+              <MappingFragment StoreEntitySet="MedicamentFirms">
+                <ScalarProperty Name="id_Firms" ColumnName="id_Firms" />
+                <ScalarProperty Name="nameFirms" ColumnName="nameFirms" />
+                <ScalarProperty Name="countryPlace" ColumnName="countryPlace" />
+                <ScalarProperty Name="id_Medicament" ColumnName="id_Medicament" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderClient">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.OrderClient">
+              <MappingFragment StoreEntitySet="OrderClient">
+                <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+                <ScalarProperty Name="dateOrder" ColumnName="dateOrder" />
+                <ScalarProperty Name="id_Basket" ColumnName="id_Basket" />
+                <ScalarProperty Name="id_Employee" ColumnName="id_Employee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipment">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Shipment">
+              <MappingFragment StoreEntitySet="Shipment">
+                <ScalarProperty Name="id_Shipment" ColumnName="id_Shipment" />
+                <ScalarProperty Name="id_Medicament" ColumnName="id_Medicament" />
+                <ScalarProperty Name="id_Firms" ColumnName="id_Firms" />
+                <ScalarProperty Name="id_Employee" ColumnName="id_Employee" />
+                <ScalarProperty Name="dateShipment" ColumnName="dateShipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Storage">
+              <MappingFragment StoreEntitySet="Storage">
+                <ScalarProperty Name="id_MedicamentPosition" ColumnName="id_MedicamentPosition" />
+                <ScalarProperty Name="id_Medicament" ColumnName="id_Medicament" />
+                <ScalarProperty Name="countOnStorage" ColumnName="countOnStorage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="AuthorizationDBModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="id_Workers" ColumnName="id_Workers" />
+                <ScalarProperty Name="FioWorkers" ColumnName="FioWorkers" />
+                <ScalarProperty Name="id_JobTitle" ColumnName="id_JobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

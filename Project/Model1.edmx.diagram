@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="546a4a2b696b48d786af188f28e50b54" Name="Diagram1">
+        <EntityTypeShape EntityType="AuthorizationDBModel.Basket" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.Client" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.collect" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.JobTitle" Width="1.5" PointX="1.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.Medicament" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.MedicamentFirms" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.OrderClient" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.Shipment" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.Storage" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.Users" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuthorizationDBModel.Workers" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Basket__ficClien__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Basket__Id__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Basket__id_Medic__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Basket__id_Worke__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__OrderClie__id_Ba__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Workers__id_JobT__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Medicamen__id_Me__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Shipment__dateSh__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Storage__id_Medi__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Shipment__id_Fir__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="AuthorizationDBModel.FK__Shipment__id_Emp__1332DBDC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
